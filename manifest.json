@@ -13,7 +13,8 @@
   "background": {
     "scripts": [
       "keycodes.js",
-      "tabs.js"
+      "tabs.js",
+      "background.js"
     ]
   },
 

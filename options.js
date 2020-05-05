@@ -3,10 +3,12 @@
 // found in the LICENSE file.
 
 function load() {
-
+  var selectedElement = document.getElementById('selected');
+  var sel = window.getSelection();
+  
   var defaultKeyString = getDefaultKeyString();
 
-  var keyString = localStorage['speakKey'];
+  var keyString = localStorage['printZplKey'];
   if (keyString == undefined) {
     keyString = defaultKeyString;
   }
@@ -25,9 +27,9 @@ function load() {
         evt.stopPropagation();
         evt.preventDefault();
         hotKeyElement.value = '';
-        localStorage['speakKey'] = '';
+        localStorage['printZplKey'] = '';
         sendKeyToAllTabs('');
-        window.speakKeyStr = '';
+        window.printZplKey = '';
         return false;
       case 9:  // Tab
         return false;
@@ -42,11 +44,11 @@ function load() {
     var keyStr = keyEventToString(evt);
     if (keyStr) {
       hotKeyElement.value = keyStr;
-      localStorage['speakKey'] = keyStr;
+      localStorage['printZplKey'] = keyStr;
       sendKeyToAllTabs(keyStr);
 
       // Set the key used by the content script running in the options page.
-      window.speakKeyStr = keyStr;
+      window.printZplKey = keyStr;
     }
     evt.stopPropagation();
     evt.preventDefault();

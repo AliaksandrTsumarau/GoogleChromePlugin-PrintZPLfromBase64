@@ -1,7 +1,6 @@
 var printKeyStr;
-var apiUrl = 'https://api.labelary.com/v1/printers/8dpmm/labels/4x6/0/';
+var apiUrl   = 'https://api.labelary.com/v1/printers/8dpmm/labels/4x6/0/';
 var imgWidth = 500;
-//var dialogTop = '50px';
 
 _createObjectURL = function(blob) {
     var objURL = URL.createObjectURL(blob);
@@ -11,13 +10,15 @@ _createObjectURL = function(blob) {
 };
 
 _fetchLabel = function(base64decodedLabelRequest) {
-    var imageUrl = apiUrl + base64decodedLabelRequest;
+    //var imageUrl = apiUrl + base64decodedLabelRequest;
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', imageUrl);
+    xhr.open('POST', apiUrl, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(base64decodedLabelRequest);
     xhr.responseType = 'blob';
     xhr.onload = function() {
         var img = document.createElement('img');
-        img.setAttribute('data-src', imageUrl);
+        img.setAttribute('data-src', apiUrl);
         img.style.border='3px solid black';
         img.width = imgWidth;
         img.className = 'icon';
@@ -30,7 +31,6 @@ _fetchLabel = function(base64decodedLabelRequest) {
 
 _displayLabel = function(outputImg){
     var dialog = document.createElement("dialog");
-    //dialog.style.top = dialogTop;
     dialog.appendChild(outputImg);
     outputImg.addEventListener("click", function() {
         dialog.close()
@@ -39,7 +39,7 @@ _displayLabel = function(outputImg){
     dialog.showModal();
 };
 
-function printZplSelection() {
+function _printZplSelection() {
 
     var focused = document.activeElement;
     var selectedText;
@@ -61,13 +61,14 @@ function printZplSelection() {
 }
 
 function onExtensionMessage(request) {
-    if (request['printZplSelection'] != undefined) {
+    if (request['_printZplSelection'] != undefined) {
         if (!document.hasFocus()) {
             return;
         }
-        printZplSelection();
+        _printZplSelection();
     } else if (request['key'] != undefined) {
         printKeyStr = request['key'];
+        console.log(printKeyStr);
     }
 }
 
@@ -81,7 +82,7 @@ function initContentScript() {
         }
         var keyStr = keyEventToString(evt);
         if (keyStr == printKeyStr && printKeyStr.length > 0) {
-            printZplSelection();
+            _printZplSelection();
             evt.stopPropagation();
             evt.preventDefault();
             return false;
