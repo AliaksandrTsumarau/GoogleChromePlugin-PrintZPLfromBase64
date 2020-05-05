@@ -1,0 +1,47 @@
+{
+  "name": "Print ZPL from base64",
+  "version": "1.1",
+  "description": "Print ZPL from base64",
+  "permissions": [
+    "<all_urls>",
+    "tts",
+    "tabs",
+    "http://api.labelary.com",
+    "activeTab"
+  ],
+
+  "background": {
+    "scripts": [
+      "keycodes.js",
+      "tabs.js"
+    ]
+  },
+
+  "browser_action": {
+    "default_icon": "icon256.png",
+    "default_title": "pring ZPL from base64"
+  },
+
+  "options_page": "options.html",
+
+  "minimum_chrome_version": "14",
+
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "keycodes.js",
+        "content_script.js"
+      ]
+    }
+  ],
+
+  "icons": {
+    "256": "icon256.png"
+  },
+
+  "manifest_version": 2
+}

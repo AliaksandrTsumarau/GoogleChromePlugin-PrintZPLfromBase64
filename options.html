@@ -1,0 +1,86 @@
+<html>
+<head>
+  <title>Print ZPL from Base64 Options</title>
+  <style>
+    body {
+      font-family: arial, helvetica, sans-serif;
+    }
+    .banner {
+      width: 100%;
+      float: left;
+    }
+    .banner_left {
+      padding: 8px;
+      float: left;
+    }
+    .banner_right {
+      padding: 8px;
+    }
+    .body_wrapper {
+      width: 100%;
+      float: left;
+    }
+    .body_left {
+      border: 0;
+      padding: 0;
+      margin: 0;
+      width: 50%;
+      float: left;
+    }
+    .body_right {
+      border: 0;
+      padding: 0;
+      margin: 0;
+      width: 46%;
+      float: left;
+    }
+    .body_inner {
+      padding: 0 32px;
+    }
+    .browser_action {
+      vertical-align: middle;
+      margin: 0 2px 3px 2px;
+    }
+    .ctrl_label {
+      width: 100px;
+      float: left;
+    }
+    .ctrl_wrap {
+      margin: 18px 8px;
+    }
+    .ctrl {
+      width: 200px;
+    }
+    #hotkey {
+      font-size: 16px;
+      width: 15em;
+      margin-left: 12px;
+    }
+    #test {
+    }
+    #defaults {
+      margin-left: 24px;
+    }
+  </style>
+  <script src="keycodes.js"></script>
+  <script src="tabs.js"></script>
+  <script src="options.js"></script>
+  <script src="content_script.js"></script>
+</head>
+<body>
+
+<div class="body_wrapper">
+  <div class="body_right">
+    <div class="body_inner">
+      <h2>When to print ZPL label</h2>
+      <p>
+        <span id="selected">Select base64 text in Kibana or somewhere else
+      </p>
+
+      <p>And use this hot key: <input type="text" id="hotkey"></input></p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
