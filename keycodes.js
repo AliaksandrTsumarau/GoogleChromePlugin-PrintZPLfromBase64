@@ -87,6 +87,9 @@ function keyEventToString(evt) {
 function getDefaultKeyString() {
   return keyEventToString({
     keyCode: 66,
-    ctrlKey: true,
-    metaKey: false});
+    metaKey: true,
+    altKey: false,
+    shiftKey: false
+  }
+  );
 }
