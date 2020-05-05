@@ -1,7 +1,7 @@
 {
-  "name": "Print ZPL from base64",
-  "version": "1.1",
-  "description": "Print ZPL from base64",
+  "name": "Draw ZPL from base64",
+  "version": "0.1",
+  "description": "Draw ZPL from base64 using https://api.labelary.com/v1/printers",
   "permissions": [
     "<all_urls>",
     "tts",

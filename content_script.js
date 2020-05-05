@@ -2,6 +2,12 @@ var printKeyStr;
 var apiUrl   = 'https://api.labelary.com/v1/printers/8dpmm/labels/4x6/0/';
 var imgWidth = 500;
 
+_b64DecodeUnicode = function(str) {
+    return decodeURIComponent(atob(str).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+}
+
 _createObjectURL = function(blob) {
     var objURL = URL.createObjectURL(blob);
     this.objectURLs = this.objectURLs || [];
@@ -10,7 +16,6 @@ _createObjectURL = function(blob) {
 };
 
 _fetchLabel = function(base64decodedLabelRequest) {
-    //var imageUrl = apiUrl + base64decodedLabelRequest;
     var xhr = new XMLHttpRequest();
     xhr.open('POST', apiUrl, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -26,7 +31,6 @@ _fetchLabel = function(base64decodedLabelRequest) {
         img.setAttribute('src', objURL);
         _displayLabel(img);
     };
-    xhr.send();
 };
 
 _displayLabel = function(outputImg){
@@ -55,7 +59,7 @@ function _printZplSelection() {
         var selectedText = sel.toString();
     }
 
-    base64decodedLabelRequest = window.atob(selectedText);
+    base64decodedLabelRequest = _b64DecodeUnicode(selectedText);
 
     _fetchLabel(base64decodedLabelRequest);
 }
